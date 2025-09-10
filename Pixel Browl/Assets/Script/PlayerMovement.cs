@@ -26,5 +26,6 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(_rigidbody2D.linearVelocity.y, _rigidbody2D.linearVelocity.x) * Mathf.Rad2Deg;
             player.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         }
+        
     }
 }

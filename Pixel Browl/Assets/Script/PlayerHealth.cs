@@ -8,8 +8,8 @@ public class PlayerHealth : MonoBehaviour
     float health = 100;
     bool damageTaken = false;
     [SerializeField] Image healthbar;
-    int k = 0;
-
+    int k = 0, hit = 0 ;
+    int hits;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,11 +24,15 @@ public class PlayerHealth : MonoBehaviour
     {
         healthbar.fillAmount = health/100;
 
+        Debug.Log(damageTaken);
+
         if (damageTaken == false)
         {
             if(k == 0 && health > 0)
-            {StartCoroutine(RestoreHealth());
-                k++;
+            {k++;
+                StartCoroutine(RestoreHealth());
+                
+                
             
             }
             
@@ -37,9 +41,9 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             if (k > 0)
-            {
+            {k = 0;
                 StopCoroutine(RestoreHealth());
-                k = 0;
+                
             }
         }
        
@@ -50,17 +54,34 @@ public class PlayerHealth : MonoBehaviour
         if (health > 0)
         {
             health -= damage;
-            damageTaken = true;
-            
-            StartCoroutine(countDown());
 
+
+            
+            damageTaken = true;
+
+            hit++;
+        }
+
+        if (hits != hit)
+        {
+            StartCoroutine(countDown());
+            hits  = hit;
         }
     }
 
     IEnumerator countDown()
     {
+       
         yield return new WaitForSeconds(3);
 
+        while(hits != hit)
+        {
+            hits = hit;
+            yield return new WaitForSeconds(3);
+            Debug.Log("wait");
+            
+        }
+        Debug.Log("stop");
         damageTaken = false;
         
     }
@@ -76,6 +97,12 @@ public class PlayerHealth : MonoBehaviour
             
            
         }
+
+        if (health >99)
+        {
+            damageTaken = true;
+        }
+
 
     }
 }
