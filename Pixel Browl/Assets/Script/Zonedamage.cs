@@ -9,6 +9,25 @@ public class Zonedamage : MonoBehaviour
     [SerializeField] PlayerHealth health;
     int damage = 10;
     bool canDamage;
+    float countDown = 0;
+
+    private void Update()
+    {
+        if (canDamage)
+        {
+            if (countDown > 0)
+            {
+                countDown -= Time.deltaTime;
+            }
+            else
+            {
+                OutOfStorm();
+                countDown = 1;
+            }
+
+        }
+        
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -16,11 +35,11 @@ public class Zonedamage : MonoBehaviour
         {
             if(collision.gameObject.tag == "Player")
             {
-                Debug.Log("Sei fuori zona");
-                canDamage = true;
-                StartCoroutine(OutOfStorm());
                 
-                Debug.Log(canDamage);
+                canDamage = true;
+                countDown = 1;
+                
+               
             }
         }
         
@@ -33,21 +52,20 @@ public class Zonedamage : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("Sei dentro zona");
+                
                 canDamage = false;
             }
         }
 
     }
 
-    IEnumerator OutOfStorm()
+    void OutOfStorm()
     {
-        Debug.Log("entrato");
-        while (canDamage == true)
+        if (health.health > 0)
         {
-            Debug.Log("colpito");
-            yield return new WaitForSeconds(1);
             health.TakeDamage(damage);
+
         }
+       
     }
 }

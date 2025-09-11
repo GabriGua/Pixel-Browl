@@ -14,7 +14,7 @@ public class SafeZone : MonoBehaviour
         transform.localScale = Vector2.one * startRadius;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (elapsedTime < zoneTime) 
         {

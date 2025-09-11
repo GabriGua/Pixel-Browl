@@ -5,11 +5,14 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 
-    float health = 100;
-    bool damageTaken = false;
+    public float health = 100f,maxHealth = 100f;
+        float regenRate = 10f;
+   public int powerUps = 0;
+    
+   float countDown = 0, regenTime = 3, regenCT = 0;
+
     [SerializeField] Image healthbar;
-    int k = 0, hit = 0 ;
-    int hits;
+   
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,30 +25,29 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.fillAmount = health/100;
+        healthbar.fillAmount = health/maxHealth;
 
-        Debug.Log(damageTaken);
-
-        if (damageTaken == false)
+        if (countDown > 0)
         {
-            if(k == 0 && health > 0)
-            {k++;
-                StartCoroutine(RestoreHealth());
-                
-                
-            
-            }
-            
-
+            countDown -= Time.deltaTime;
         }
         else
         {
-            if (k > 0)
-            {k = 0;
-                StopCoroutine(RestoreHealth());
-                
+            if(regenCT > 0)
+            {
+
+                regenCT -= Time.deltaTime;
+            }
+            else
+            {
+                RestoreHealth();
+                regenCT = 1;
             }
         }
+
+        
+        
+
        
     }
 
@@ -56,53 +58,30 @@ public class PlayerHealth : MonoBehaviour
             health -= damage;
 
 
-            
-            damageTaken = true;
 
-            hit++;
-        }
+            countDown = regenTime;
 
-        if (hits != hit)
-        {
-            StartCoroutine(countDown());
-            hits  = hit;
-        }
-    }
-
-    IEnumerator countDown()
-    {
-       
-        yield return new WaitForSeconds(3);
-
-        while(hits != hit)
-        {
-            hits = hit;
-            yield return new WaitForSeconds(3);
-            Debug.Log("wait");
             
         }
-        Debug.Log("stop");
-        damageTaken = false;
+
         
     }
 
-    IEnumerator RestoreHealth()
+
+    void RestoreHealth()
     {
-
-        while (health < 100 && damageTaken == false)
+        if(health < maxHealth)
         {
-            yield return new WaitForSeconds(1);
-            health += 10;
-
-            
-           
+            health += regenRate;
         }
-
-        if (health >99)
-        {
-            damageTaken = true;
-        }
+         
 
 
+    }
+
+    public void AddPowerUp()
+    {
+        powerUps++;
+        maxHealth += regenRate * powerUps;
     }
 }

@@ -11,6 +11,9 @@ public class ShootingSysteam : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject player;
 
+    Transform tempTransform;
+    
+
     int bullets = 3;
     [SerializeField] SpriteRenderer render;
 
@@ -29,6 +32,7 @@ public class ShootingSysteam : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
 
         if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
@@ -44,12 +48,16 @@ public class ShootingSysteam : MonoBehaviour
 
         if (joystick.Horizontal == 0 && joystick.Vertical == 0)
         {
+            tempTransform = bullet.transform;
+            
             if (canShoot && bullets > 0)
             {
                 canShoot = false;
-                
-                Instantiate(bullet, bulletSpawn.transform);
                 player.transform.rotation = rotator.transform.rotation;
+                
+                bulletSpawn.transform.rotation = tempTransform.rotation;
+                Instantiate(bullet, bulletSpawn.transform);
+                
                 
                 bullets--;
                 if (bullets == 2)
@@ -58,6 +66,7 @@ public class ShootingSysteam : MonoBehaviour
                     StartCoroutine(ReloadBullet());
                 }
                 UpdateSprite();
+                
             }
         }
     }
