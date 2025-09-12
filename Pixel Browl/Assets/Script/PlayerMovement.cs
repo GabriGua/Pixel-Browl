@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-     public Rigidbody2D _rigidbody2D;
+     Rigidbody2D _rigidbody2D;
     [SerializeField] private FixedJoystick joystick;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float moveSpeed = 6;
     [SerializeField] private GameObject player;
     private ShootingSysteam ShootingSysteam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         _rigidbody2D = GetComponent<Rigidbody2D>();
         ShootingSysteam = gameObject.GetComponent<ShootingSysteam>();
     }

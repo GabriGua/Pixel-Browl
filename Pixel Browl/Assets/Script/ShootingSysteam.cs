@@ -11,7 +11,7 @@ public class ShootingSysteam : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject player;
 
-    Transform tempTransform;
+   
     
 
     int bullets = 3;
@@ -48,14 +48,14 @@ public class ShootingSysteam : MonoBehaviour
 
         if (joystick.Horizontal == 0 && joystick.Vertical == 0)
         {
-            tempTransform = bullet.transform;
+           
             
             if (canShoot && bullets > 0)
             {
                 canShoot = false;
                 player.transform.rotation = rotator.transform.rotation;
                 
-                bulletSpawn.transform.rotation = tempTransform.rotation;
+                
                 Instantiate(bullet, bulletSpawn.transform);
                 
                 

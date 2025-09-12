@@ -8,7 +8,11 @@ public class ChestSystem : MonoBehaviour
     [SerializeField] Image healthBar;
     float chestHealth = 500f;
     [SerializeField] GameObject powerUp;
+  
     
+
+   
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,8 +29,7 @@ public class ChestSystem : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (healthBar != null)
-        {
+        
             if (chestHealth >= 0)
             {
                 chestHealth -= damage;
@@ -36,7 +39,7 @@ public class ChestSystem : MonoBehaviour
             {
                 animator.Play("Opening");
             }
-        }
+        
     }
 
     public void GivePowerUp()

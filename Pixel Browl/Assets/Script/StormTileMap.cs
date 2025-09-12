@@ -3,38 +3,46 @@ using UnityEngine.Tilemaps;
 
 public class StormTileMap : MonoBehaviour
 {
-    
-    Tilemap Tilemap;
-   [SerializeField] Tile tile;
-    
-    
+    [SerializeField] private Tilemap tilemap;
+    [SerializeField] private TileBase stormTileBase;
+    [SerializeField] private Transform safezone;
 
-    private void Start()
+   void Update()
     {
-       
-        Tilemap = GetComponent<Tilemap>();
-    }
+        Vector3 center = safezone.position;
+        Vector3 size = safezone.localScale;
 
-    private void Update()
-    {
-        
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision != null)
+        Vector3 minWorld = (center - size) / 2;
+        Vector3 maxWorld = (center + size);
+
+        Vector3Int minCell = tilemap.WorldToCell(minWorld);
+        Vector3Int maxCell = tilemap.WorldToCell(maxWorld);
+
+
+        RectInt safeZoneRect = new RectInt(
+            minCell.x + 1,
+            minCell.y - 4,
+            maxCell.x + 1,
+            maxCell.y + 8);
+
+
+        foreach (var pos in tilemap.cellBounds.allPositionsWithin)
         {
-            
-            if(collision.tag == "Zone")
+            Vector2Int cellpos = new Vector2Int(pos.x, pos.y);
+
+
+            if (!safeZoneRect.Contains(cellpos))
             {
-                for (int i = 0; i < 42; i++)
-                {
-                    for(int j = 0; j < 42; j++)
-                    {
-                        
-                    }
-                }
+                tilemap.SetTile(pos, stormTileBase);
             }
+            else
+            {
+
+                tilemap.SetTile(pos, null);
+            }
+
         }
     }
+    
 }

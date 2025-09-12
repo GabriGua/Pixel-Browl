@@ -11,6 +11,7 @@ public class CameraRect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         cam = GetComponent<Camera>();
 
     }
