@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     
    float countDown = 0, regenTime = 3, regenCT = 0;
 
-    [SerializeField] Image healthbar;
+   Image healthbar;
    
 
 
@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         healthbar.fillAmount = health;
+        Debug.Log(health);
        
     }
 
@@ -83,5 +84,10 @@ public class PlayerHealth : MonoBehaviour
     {
         powerUps++;
         maxHealth += regenRate * powerUps;
+    }
+
+    public void SetHealthBar(Image healthbar)
+    {
+        this.healthbar = healthbar;
     }
 }

@@ -110,5 +110,10 @@ public class ShootingSysteam : MonoBehaviour
         }
 
     }
+
+    public void SetShootingJoystick(FixedJoystick joystickM)
+    {
+        joystick = joystickM;
+    }
 }
     

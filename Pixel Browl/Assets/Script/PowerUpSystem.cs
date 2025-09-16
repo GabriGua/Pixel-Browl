@@ -3,7 +3,7 @@ using UnityEngine;
 public class PowerUpSystem : MonoBehaviour
 {
 
-    [SerializeField] PlayerHealth PlayerHealth;
+    [SerializeField]PlayerHealth PlayerHealth;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,9 +14,14 @@ public class PowerUpSystem : MonoBehaviour
             {
 
                 PlayerHealth.AddPowerUp();
-                    Destroy(gameObject);
+                Destroy(gameObject);
                 
             }
         }
+    }
+
+    public void SetPlayerHealth(PlayerHealth playerHealth)
+    {
+        this.PlayerHealth = playerHealth;
     }
 }

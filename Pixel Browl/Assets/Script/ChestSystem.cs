@@ -7,7 +7,7 @@ public class ChestSystem : MonoBehaviour
     Animator animator;
     [SerializeField] Image healthBar;
     float chestHealth = 500f;
-    [SerializeField] GameObject powerUp;
+    GameObject powerUp;
   
     
 
@@ -16,9 +16,11 @@ public class ChestSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        powerUp.SetActive(false);
-        animator = GetComponent<Animator>();
+        
+        
+        animator = this.gameObject.GetComponent<Animator>();
         healthBar.fillAmount = chestHealth;
+        
     }
 
     // Update is called once per frame
@@ -46,5 +48,10 @@ public class ChestSystem : MonoBehaviour
     {
         powerUp.SetActive(true);
         Destroy(gameObject);
+    }
+
+    public void SetPowerUpChildren(GameObject powerUp)
+    {
+        this.powerUp = powerUp;
     }
 }

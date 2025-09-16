@@ -3,17 +3,29 @@ using UnityEngine;
 public class CameraRect : MonoBehaviour
 {
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
     Vector2 playerPos, playerX, playerY;
     Camera cam;
     [SerializeField] GameObject[] cameraLimit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        cameraLimit[0].SetActive(false);
+        cameraLimit[1].SetActive(false);
         cam = GetComponent<Camera>();
 
+    }
+
+    public void SetCameraTarget(GameObject target)
+    {
+
+        player = target;
+        playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
+        cam.transform.position = playerPos;
+        cameraLimit[0].SetActive(true);
+        cameraLimit[1].SetActive(true);
+        
     }
 
     // Update is called once per frame

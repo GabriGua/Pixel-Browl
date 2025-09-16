@@ -6,10 +6,12 @@ public class Zonedamage : MonoBehaviour
 {
 
 
-    [SerializeField] PlayerHealth health;
+    PlayerHealth health;
     int damage = 10;
     bool canDamage;
     float countDown = 0;
+
+   
 
     private void Update()
     {
@@ -67,5 +69,10 @@ public class Zonedamage : MonoBehaviour
 
         }
        
+    }
+
+    public void SetSafeZoneTarget(PlayerHealth playerHealth)
+    {
+        health = playerHealth;
     }
 }
