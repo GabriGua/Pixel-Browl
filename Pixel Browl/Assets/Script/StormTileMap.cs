@@ -21,10 +21,10 @@ public class StormTileMap : MonoBehaviour
 
 
         RectInt safeZoneRect = new RectInt(
-            minCell.x + 1,
-            minCell.y - 4,
+            minCell.x,
+            minCell.y - 3,
             maxCell.x + 1,
-            maxCell.y + 8);
+            maxCell.y + 9);
 
 
         foreach (var pos in tilemap.cellBounds.allPositionsWithin)

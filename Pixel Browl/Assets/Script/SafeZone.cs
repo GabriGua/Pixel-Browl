@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SafeZone : MonoBehaviour
 {
-    [SerializeField] private float startRadius = 60f;
-    [SerializeField] private float endRadius = 10f;
+    [SerializeField] private float startRadius;
+    [SerializeField] private float endRadius;
 
     [SerializeField] private float zoneTime = 60;
 

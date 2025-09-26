@@ -24,16 +24,31 @@ public class BulletDestruction : MonoBehaviour
     }
 
     
-    private void OnCollisionEnter2D(Collision2D collision)
+  
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision != null)
         {
-            if(collision.gameObject.tag == "chest")
+            if (collision.gameObject.tag == "chest")
             {
                 chestSystem = collision.gameObject.GetComponent<ChestSystem>();
-                Debug.Log(chestSystem.name);
+
                 chestSystem.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+
+            if (collision.gameObject.tag == "Bot")
+            {
+                Debug.Log("Bot Colpito");
+            }
+
+            if (collision.gameObject.tag == "Player")
+            {
+
             }
         }
     }
 }
+
+
