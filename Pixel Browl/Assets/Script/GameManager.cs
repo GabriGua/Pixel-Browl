@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
      private GameObject player;
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject botPrefab;
     [SerializeField] private GameObject spawnPoint;
     PlayerMovement playerMovement;
     ShootingSysteam shootingSysteam;
@@ -50,6 +51,8 @@ public class GameManager : MonoBehaviour
             ChestSystem chestSystem = chestSpawned.GetComponent<ChestSystem>();
             chestSystem.SetPowerUpChildren(upPower);
         }
+
+        BotSpawn();
     }
 
     private void Start()
@@ -76,5 +79,20 @@ public class GameManager : MonoBehaviour
         
 
         cam.SetCameraTarget(player);
+     
+        
+        playerSpawnPoint[randomPos] = null;
+    }
+
+    void BotSpawn()
+    {
+        for (int i = 0; i < playerSpawnPoint.Length; i++)
+        {
+            if (playerSpawnPoint[i] != null)
+            {
+                player = Instantiate(botPrefab, playerSpawnPoint[i].transform);
+            }
+            
+        }
     }
 }

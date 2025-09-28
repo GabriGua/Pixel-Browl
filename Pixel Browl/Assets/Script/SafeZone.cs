@@ -1,5 +1,6 @@
+using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SafeZone : MonoBehaviour
 {
     [SerializeField] private float startRadius;
@@ -9,8 +10,11 @@ public class SafeZone : MonoBehaviour
 
     [SerializeField] private float elapsedTime = 0f;
 
+ 
+
     private void Start()
     {
+     
         transform.localScale = Vector2.one * startRadius;
     }
 
@@ -22,9 +26,12 @@ public class SafeZone : MonoBehaviour
 
             float t = elapsedTime / zoneTime;
 
+            
+
             float currentRadius = Mathf.Lerp(startRadius, endRadius, t);
 
             transform.localScale = Vector2.one * currentRadius;
         }
     }
 }
+

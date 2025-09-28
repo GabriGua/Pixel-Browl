@@ -20,9 +20,14 @@ public class BotSystem : MonoBehaviour
     [SerializeField] float chestDetection = 8f;
     [SerializeField] float fireCooldown = 1f;
 
-    [SerializeField] Vector3 patrolTarget;
+    Vector3 patrolTarget;
+    [SerializeField] Vector3 offSet = new Vector3(0,0, 18f);
 
 
+    private void Awake()
+    {
+        PickRandomDestination();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +35,7 @@ public class BotSystem : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        Debug.Log("Start");
+        
     }
 
     // Update is called once per frame
@@ -40,7 +45,7 @@ public class BotSystem : MonoBehaviour
         {
             case BotState.Patrol:
                 PatrolBehaviour();
-                Debug.Log("Lets patrol");
+                
                 break;
             case BotState.Loot:
                 LootBehaviour();
@@ -56,13 +61,13 @@ public class BotSystem : MonoBehaviour
         if (Vector2.Distance(transform.position, patrolTarget) < 0.5f)
         {
             PickRandomDestination();
-            Debug.Log("Picking");
+            
         }
         else
         {
             agent.SetDestination(patrolTarget);
-            Debug.Log("Lets go");
-            Debug.Log(agent.name);
+            RotateTowards(patrolTarget);
+
         }
 
 
@@ -70,9 +75,35 @@ public class BotSystem : MonoBehaviour
 
     void PickRandomDestination()
     {
-        patrolTarget = (Vector2)transform.position + Random.insideUnitCircle * 5f;
-        Debug.Log("New pos");
-        Debug.Log(patrolTarget);
+        for(int i = 0; i < 15; i++)
+        {
+            patrolTarget = (Vector2)transform.position + Random.insideUnitCircle * 5f;
+            patrolTarget += offSet;
+
+            Collider2D zone = Physics2D.OverlapPoint(patrolTarget, safeZoneMask);
+            if (zone == null)
+            {
+                continue;
+            }
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(patrolTarget, out hit, 2f, NavMesh.AllAreas))
+            {
+                patrolTarget = hit.position;
+                return;
+
+            }
+        }
+        
+        
+        
+    }
+
+    void RotateTowards(Vector3 target)
+    {
+        Vector2 direction = (target - transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     void LootBehaviour()
