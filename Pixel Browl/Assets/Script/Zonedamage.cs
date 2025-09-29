@@ -7,9 +7,11 @@ public class Zonedamage : MonoBehaviour
 
 
     PlayerHealth health;
-    int damage = 10;
+    float damage = 100f;
     bool canDamage;
     float countDown = 0;
+
+    BotSystem[] botSystems;
 
    
 
@@ -41,7 +43,16 @@ public class Zonedamage : MonoBehaviour
                 canDamage = true;
                 countDown = 1;
                 
+
                
+            }
+
+            if (collision.gameObject.tag == "Bot")
+            {
+                GameObject gameObject = collision.gameObject;
+                BotSystem botSystem = gameObject.GetComponent<BotSystem>();
+                botSystem.StartStormDamage();
+
             }
         }
         
@@ -56,6 +67,14 @@ public class Zonedamage : MonoBehaviour
             {
                 
                 canDamage = false;
+            }
+            
+            if (collision.gameObject.tag == "Bot")
+            {
+                GameObject gameObject = collision.gameObject;
+                BotSystem botSystem = gameObject.GetComponent<BotSystem>();
+                botSystem.StopStormDamage();
+                
             }
         }
 

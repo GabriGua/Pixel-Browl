@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caae181c1719f8f4ea21fa26621cbaa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2.5
   player: {fileID: 5876966852649871247}
 --- !u!114 &4618911493228367358
 MonoBehaviour:
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69cadd6d0b5a34e40afc2ab33e068ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 1000
+  maxHealth: 1000
   powerUps: 0
 --- !u!70 &2038389782887274943
 CapsuleCollider2D:

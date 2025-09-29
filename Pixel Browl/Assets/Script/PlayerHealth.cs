@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
 
-    public float health = 100f,maxHealth = 100f;
-        float regenRate = 10f;
+    public float health = 1000f,maxHealth = 1000f;
+        float regenRate = 50f;
    public int powerUps = 0;
     
    float countDown = 0, regenTime = 3, regenCT = 0;
@@ -52,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
        
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (health > 0)
         {
@@ -62,7 +63,11 @@ public class PlayerHealth : MonoBehaviour
 
             countDown = regenTime;
 
-            
+
+        }
+        else
+        {
+            SceneManager.LoadScene(2);
         }
 
         

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] chestSpawnPoint;
+    [SerializeField] private GameObject[] botHealthBars;
     
     [SerializeField] private GameObject chest;
     [SerializeField] private GameObject powerUp;
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image healthBar;
 
     [SerializeField] Zonedamage zoneDamage;
-
+    public static int totPlayers = 7;
 
     int randomChest, randomSpawn;
     int[] alredySpawned;
@@ -55,10 +56,17 @@ public class GameManager : MonoBehaviour
         BotSpawn();
     }
 
+    
+
     private void Start()
     {
-       
+        
 
+    }
+
+    private void Update()
+    {
+        
     }
 
     void SpawnPlayer()
@@ -91,8 +99,20 @@ public class GameManager : MonoBehaviour
             if (playerSpawnPoint[i] != null)
             {
                 player = Instantiate(botPrefab, playerSpawnPoint[i].transform);
+                BotSystem botSystem = player.GetComponent<BotSystem>();
+                botSystem.SetHealthBar(botHealthBars[i]);
+            }
+            else
+            {
+                botHealthBars[i].SetActive(false);
             }
             
+     
         }
+    }
+
+    public void BotDied()
+    {
+        totPlayers--;
     }
 }

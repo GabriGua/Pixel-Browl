@@ -40,12 +40,24 @@ public class BulletDestruction : MonoBehaviour
 
             if (collision.gameObject.tag == "Bot")
             {
-                Debug.Log("Bot Colpito");
+                GameObject bot = collision.gameObject;
+
+                BotSystem botSystem = bot.GetComponent<BotSystem>();
+
+                botSystem.TakeDamage(damage);
+                Destroy(gameObject);
+
             }
 
             if (collision.gameObject.tag == "Player")
             {
+                playerHealth.TakeDamage(damage);
+                Destroy(gameObject);
+            }
 
+            if(collision.gameObject.tag == "Obstacle")
+            {
+                Destroy(gameObject);
             }
         }
     }

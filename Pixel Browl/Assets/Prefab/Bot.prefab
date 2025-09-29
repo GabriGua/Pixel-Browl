@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2247476585250477040}
   - component: {fileID: 4740839509856346416}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Rotator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251595044872120949}
   - component: {fileID: 6698043736343160775}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: ShootingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9083136176448214157}
   - component: {fileID: 3269822901565242589}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Idle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5311456025064013427}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 4575795103630972576}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.51, z: 7.54}
+  m_LocalPosition: {x: 0, y: 4.06, z: -1.1}
   m_LocalScale: {x: 1.328886, y: 1.328886, z: 1.328886}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,12 +276,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2715746364133516778}
-  - component: {fileID: 7715469228095189279}
   - component: {fileID: 4680698590707418600}
   - component: {fileID: 7130779005246423601}
   - component: {fileID: 7128904050801367814}
   - component: {fileID: -6243221238207023879}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Bot
   m_TagString: Bot
   m_Icon: {fileID: 0}
@@ -305,21 +304,6 @@ Transform:
   - {fileID: 2247476585250477040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7715469228095189279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4671373810654113944}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69cadd6d0b5a34e40afc2ab33e068ff1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  powerUps: 0
 --- !u!70 &4680698590707418600
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -370,19 +354,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  player: {fileID: 0}
   chestMask:
     serializedVersion: 2
     m_Bits: 256
   safeZoneMask:
     serializedVersion: 2
     m_Bits: 512
-  bulletPrefab: {fileID: 0}
-  bulletSpawn: {fileID: 0}
-  visionRadius: 8
-  attackRange: 3
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 2557077132088471505, guid: 6afb23d9b4e9dd040bbcbb93545aee35, type: 3}
+  bulletSpawn: {fileID: 5311456025064013427}
+  visionRadius: 6
+  attackRange: 4
   chestDetection: 8
   fireCooldown: 1
+  currentHealth: 1000
+  maxHealth: 1000
   offSet: {x: 0, y: 0, z: 18}
 --- !u!195 &7128904050801367814
 NavMeshAgent:
@@ -394,7 +382,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.19
-  m_Speed: 2.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -443,7 +431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4433363128159889023}
   - component: {fileID: 5712583853579450362}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Aura1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6304831935702348095}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Centro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
