@@ -5,7 +5,7 @@ public class ChestSystem : MonoBehaviour
 {
 
     Animator animator;
-    [SerializeField] Image healthBar;
+    //[SerializeField] Image healthBar;
     float chestHealth = 500f;
     GameObject powerUp;
   
@@ -19,14 +19,14 @@ public class ChestSystem : MonoBehaviour
         
         
         animator = this.gameObject.GetComponent<Animator>();
-        healthBar.fillAmount = chestHealth;
+        //healthBar.fillAmount = chestHealth;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthBar.fillAmount = chestHealth/500;
+        //healthBar.fillAmount = chestHealth/500;
     }
 
     public void TakeDamage(float damage)

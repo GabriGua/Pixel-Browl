@@ -75,7 +75,7 @@ public class ShootingSysteam : MonoBehaviour
     {
         while (bullets < 3)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             bullets++;
             UpdateSprite();
             

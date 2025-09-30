@@ -35,7 +35,7 @@ public class BotSystem : MonoBehaviour
     Vector3 healthOffSet = new Vector3(0, 1f, 0);
     float countDown = 0, regenTime = 3, regenCT = 0;
     float regenRate = 50f;
-    int stormCountDown = 1;
+    float stormCountDown = 1;
     float damage = 50f;
 
     bool canDamage = false;
@@ -99,7 +99,7 @@ public class BotSystem : MonoBehaviour
         {
             if (stormCountDown > 0)
             {
-                countDown -= Time.deltaTime;
+                stormCountDown -= Time.deltaTime;
             }
             else
             {
@@ -331,7 +331,7 @@ public class BotSystem : MonoBehaviour
             Die();
         }
     }
-        int j = 0;
+        
     public void StartStormDamage()
     {
         canDamage = true;

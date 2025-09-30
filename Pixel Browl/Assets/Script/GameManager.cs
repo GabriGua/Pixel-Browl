@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -28,13 +29,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image healthBar;
 
     [SerializeField] Zonedamage zoneDamage;
-    public static int totPlayers = 7;
+    public static int totPlayers;
 
     int randomChest, randomSpawn;
     int[] alredySpawned;
 
     private void Awake()
     {
+        totPlayers = 7;
         SpawnPlayer();
         randomChest = Random.Range(10, chestSpawnPoint.Length);
 
@@ -66,7 +68,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if(totPlayers < 2)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     void SpawnPlayer()
